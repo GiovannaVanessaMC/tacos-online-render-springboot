@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Finalizar pedido</title>
+	<link rel="icon" type="image/png" th:href="@{/images/logoTaco.png}">
+	<link rel="stylesheet" th:href="@{/taco.css}" />
+</head>
+
+<body class="page">
+
+<div class="container">
+	<form method="POST" th:action="@{/orders}" th:object="${order}">
+		<div class="page-header">
+			<div>
+				<p class="eyebrow">Último paso</p>
+				<h2 class="pagina2">Finaliza tu pedido</h2>
+				<p class="subtitle">Completa tus datos de envío y pago para recibir tu creación.</p>
+			</div>
+
+			<div class="header-actions">
+				<img class="header-image" th:src="@{/images/taco5.jfif}" alt="Taco" />
+				<a th:href="@{/design}" class="btn btn-secondary">Diseñar otro taco</a>
+			</div>
+		</div>
+
+		<div th:if="${#fields.hasErrors()}" class="alert-error">
+			Por favor, corrige los errores y vuelve a intentarlo.
+		</div>
+
+		<div class="form-grid">
+			<div class="card">
+				<div class="section-title">
+					<h2>Datos de envío</h2>
+					<p>Indícanos dónde quieres recibir tu pedido.</p>
+				</div>
+
+				<div class="field">
+					<label th:for="deliveryName">Nombre</label>
+					<input class="input" type="text" th:field="*{deliveryName}" placeholder="Tu nombre completo" />
+					<span class="validationError" th:if="${#fields.hasErrors('deliveryName')}" th:errors="*{deliveryName}">Campo inválido</span>
+				</div>
+
+				<div class="field">
+					<label th:for="deliveryStreet">Dirección</label>
+					<input class="input" type="text" th:field="*{deliveryStreet}" placeholder="Calle, número..." />
+					<span class="validationError" th:if="${#fields.hasErrors('deliveryStreet')}" th:errors="*{deliveryStreet}">Campo inválido</span>
+				</div>
+
+				<div class="field">
+					<label th:for="deliveryCity">Ciudad</label>
+					<input class="input" type="text" th:field="*{deliveryCity}" placeholder="Ciudad" />
+					<span class="validationError" th:if="${#fields.hasErrors('deliveryCity')}" th:errors="*{deliveryCity}">Campo inválido</span>
+				</div>
+
+				<div class="two-columns">
+					<div class="field">
+						<label th:for="deliveryState">Estado</label>
+						<input class="input" type="text" th:field="*{deliveryState}" placeholder="MADRID" maxlength="10" />
+						<span class="validationError" th:if="${#fields.hasErrors('deliveryState')}" th:errors="*{deliveryState}">Campo inválido</span>
+					</div>
+
+					<div class="field">
+						<label th:for="deliveryZip">Código postal</label>
+						<input class="input" type="text" th:field="*{deliveryZip}" placeholder="28013" />
+						<span class="validationError" th:if="${#fields.hasErrors('deliveryZip')}" th:errors="*{deliveryZip}">Campo inválido</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="section-title">
+					<h2>Datos de pago</h2>
+					<p>Introduce la información de tu tarjeta.</p>
+				</div>
+
+				<div class="field">
+					<label th:for="ccNumber">Tarjeta de crédito</label>
+					<input class="input" type="text" th:field="*{ccNumber}" placeholder="1234123412341234" />
+					<span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}">Campo inválido</span>
+				</div>
+
+				<div class="two-columns">
+					<div class="field">
+						<label th:for="ccExpiration">Expira</label>
+						<input class="input" type="text" th:field="*{ccExpiration}" placeholder="MM/YY" />
+						<span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}">Campo inválido</span>
+					</div>
+
+					<div class="field">
+						<label th:for="ccCVV">CVV</label>
+						<input class="input" type="text" th:field="*{ccCVV}" placeholder="123" />
+						<span class="validationError" th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">Campo inválido</span>
+					</div>
+				</div>
+
+				<div class="actions">
+					<input class="btn btn-primary" type="submit" value="Enviar pedido" />
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>
